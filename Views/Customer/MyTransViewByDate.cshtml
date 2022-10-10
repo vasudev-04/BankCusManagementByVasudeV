@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BankCusManagement.ViewModal.CustAndHisTransactions>
+
+@{
+    ViewBag.Title = "MyTransViewByDate";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<h2 class="text-primary bolder">CUSTOMER TRANSACTION DETAILS BY DATE</h2>
+<style>
+    table.even {
+        border-collapse: collapse;
+    }
+
+        table.even tr td, th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        table.even tr:nth-child(2n) {
+            background: #f1f1f1;
+        }
+</style>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table even">
+    <tr class="bolder" style="color: blueviolet; background-color: antiquewhite; font-size: 15px">
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_Code)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Customer_FullName)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOf_Transaction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transaction_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transaction_Date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="bolder" style="font-size:15px">
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_Code)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Customer_FullName)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOf_Transaction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transaction_Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transaction_Date).ToString().Remove(11,8)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,100 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    ViewBag.Title = "Withdrawl";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+<html>
+
+<head>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+
+    @if (ViewBag.Error != null)
+    {
+        <h3 style="color:red">@ViewBag.Error</h3>
+    }
+
+
+    <h2>Withdrawl</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @*<h4>tbl_customers</h4>*@
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Uid, "Uid", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Uid, new { htmlAttributes = new { @class = "col-md-2", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.Uid, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btnSubmit" type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div>
+
+        <script>
+            $(document).ready(function () {
+
+                    @*if (@ViewBag.Error == null) {
+                        swal("No matching Details were found");
+                    }*@
+
+                $("#btnSubmit").click(function (e) {
+
+                        var val1 = $("#Uid").val();
+
+
+
+                    if (val1 <= 0 || val1.match(/^[a-z]+$/)) {
+                    swal("Invalid Input!");
+                     e.preventDefault();
+                        }
+
+
+
+                    });
+
+
+            });
+
+
+            @*$(document).ready(function () {
+
+                if (@ViewBag.message == null) {
+
+                        swal("No matching Details were found");
+
+                }
+            });*@
+        </script>
+
+        @*@Html.ActionLink("Back to List", "Index")*@
+    </div>
+</body>
+
+</html>
+

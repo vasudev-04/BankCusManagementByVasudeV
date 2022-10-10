@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankCusManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_customer_transactions">
+    <Key>
+      <PropertyRef Name="Transaction_Id" />
+    </Key>
+    <Property Name="Transaction_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cust_Id" Type="int" Nullable="false" />
+    <Property Name="TypeOf_Transaction" Type="char" MaxLength="10" />
+    <Property Name="Transaction_Amount" Type="float" />
+    <Property Name="Transaction_Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_customers">
+    <Key>
+      <PropertyRef Name="Cust_Id" />
+    </Key>
+    <Property Name="Cust_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="Customer_FirstName" Type="varchar" MaxLength="200" />
+    <Property Name="Customer_LastName" Type="varchar" MaxLength="200" />
+    <Property Name="Customer_City" Type="varchar" MaxLength="200" />
+    <Property Name="Account_Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Account_BalanceAmount" Type="float" />
+    <Property Name="Last_TransactionDate" Type="datetime" />
+    <Property Name="Customer_Code" Type="varchar" MaxLength="33" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="tbl_role_menu">
+    <Key>
+      <PropertyRef Name="Menu_Id" />
+    </Key>
+    <Property Name="Menu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Menu_Name" Type="varchar" MaxLength="200" />
+    <Property Name="Role_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Roles">
+    <Key>
+      <PropertyRef Name="RoleI_d" />
+    </Key>
+    <Property Name="RoleI_d" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_users">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login_Id" Type="varchar" MaxLength="20" />
+    <Property Name="Password" Type="varchar" MaxLength="20" />
+    <Property Name="User_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Role_ID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="10" />
+    <Property Name="Last_Login" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_tbl_customer_transactions_tbl_customer_transactions">
+    <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="1" />
+    <End Role="tbl_customer_transactions" Type="Self.tbl_customer_transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_customers">
+        <PropertyRef Name="Cust_Id" />
+      </Principal>
+      <Dependent Role="tbl_customer_transactions">
+        <PropertyRef Name="Cust_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_customers_tbl_users">
+    <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="1" />
+    <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_users">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="tbl_customers">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_role_menu_tbl_Roles">
+    <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="1" />
+    <End Role="tbl_role_menu" Type="Self.tbl_role_menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Roles">
+        <PropertyRef Name="RoleI_d" />
+      </Principal>
+      <Dependent Role="tbl_role_menu">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_users_tbl_Roles">
+    <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="1" />
+    <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Roles">
+        <PropertyRef Name="RoleI_d" />
+      </Principal>
+      <Dependent Role="tbl_users">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetTransactionsByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <EntityContainer Name="BankCusManagementModelStoreContainer">
+    <EntitySet Name="tbl_customer_transactions" EntityType="Self.tbl_customer_transactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_customers" EntityType="Self.tbl_customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_role_menu" EntityType="Self.tbl_role_menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_customer_transactions_tbl_customer_transactions" Association="Self.FK_tbl_customer_transactions_tbl_customer_transactions">
+      <End Role="tbl_customers" EntitySet="tbl_customers" />
+      <End Role="tbl_customer_transactions" EntitySet="tbl_customer_transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_customers_tbl_users" Association="Self.FK_tbl_customers_tbl_users">
+      <End Role="tbl_users" EntitySet="tbl_users" />
+      <End Role="tbl_customers" EntitySet="tbl_customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_role_menu_tbl_Roles" Association="Self.FK_tbl_role_menu_tbl_Roles">
+      <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+      <End Role="tbl_role_menu" EntitySet="tbl_role_menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_users_tbl_Roles" Association="Self.FK_tbl_users_tbl_Roles">
+      <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+      <End Role="tbl_users" EntitySet="tbl_users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

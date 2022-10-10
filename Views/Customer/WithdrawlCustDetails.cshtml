@@ -1,0 +1,243 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    ViewBag.Title = "WithdrawlCustDetails";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<html>
+
+<head>
+    @*<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+
+    @if (TempData["Error"] != null)
+    {
+        <script>
+                swal("Error!", "@TempData["Error"]");
+        </script>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <script>
+                swal("Success", "@TempData["Success"]");
+        </script>
+    }
+    @*<div class="alert alert-success">
+            <strong>Success !</strong> @TempData["Success"]
+            <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                <span>&times;</span>
+            </button>
+        </div>*@
+    <!--}-->
+    @*
+        @if (TempData["Error"] != null)
+           {
+               <h3 style="color:red"></h3>
+               <div class="alert alert-danger">
+                   <strong>Warning !</strong> @TempData["Error"]
+                   <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                       <span>&times;</span>
+                   </button>
+               </div>
+           }*@
+
+
+    <h2>Withdrawl Customer Details</h2>
+
+    <div>
+        @*<h4>tbl_customers</h4>*@
+        <hr />
+        @*<form action="/Customer/WithdrawlCustDetails" method="post">*@
+
+
+
+
+        <table class="table even">
+
+
+            <tr class="bolder" style="color: blueviolet; background-color: antiquewhite; font-size: 15px">
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Customer_FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer_LastName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer_City)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Account_Type)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Account_BalanceAmount)
+                </th>
+
+
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Last_thansactionDate)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbl_users.Login_Id)
+                    </th>*@
+
+            </tr>
+
+
+
+            <tr class="bolder" style="font-size:15px">
+                <td>
+                    @Html.DisplayFor(model => model.Customer_FirstName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Customer_LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Customer_City)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Account_Type)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(model => model.Account_BalanceAmount)
+                </td>
+
+                @*<td>
+                        @Html.DisplayFor(model => model.Last_thansactionDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.tbl_users.Login_Id)
+                    </td>*@
+            </tr>
+
+        </table>
+
+
+
+
+    </div>
+
+    <form method="post" action="/Customer/WithdrawlCustDetails">
+        <div>
+            <label>Enter Amount</label>
+            <input type="number" id="amt" name="amt" min="100" required="required" />
+
+
+        </div>
+        @*@using (Html.BeginForm("WithdrawlCustDetails", "Customer", FormMethod.Post, new { amt = Model.Account_BalanceAmount }))
+            {*@
+        <div>
+            <input type="submit" id="btnSubmit" value="Withdraw" class="btn btn-primary" />
+        </div>
+        @*}*@
+        @*</form>*@
+
+    </form>
+    <div>
+
+        @*  <script>
+                $(document).ready(function () {
+
+
+                    $('#btnSubmit').unbind('click');
+                    $('#btnSubmit').on('click', function () {
+                        $.ajax({
+
+                            url: "/Customer/WithdrawlCustDetails",
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                amt: $("#amount").val()
+
+                            }),
+                            async: false
+                        });
+                    });
+                });
+            </script>*@
+
+
+
+        @*<script>
+                $(document).ready(function () {
+                    debugger;
+                    $("#btnSubmit").click(function (e) {
+
+                        var val1 = $("#Account_BalanceAmount").val();
+                        var val2 = $("#amount").val();
+
+
+                        //if (val1 == null || val1 == '' || val1.toLowerCase() == "undefined") {
+                        //    swal("No Matching details were found!");
+                        //}
+
+                        if (val2 <= 0 || val2.match(/^[a-z]+$/)) {
+                            swal("Invalid Input!");
+                            //e.preventDefault();
+                            return false;
+                        }
+
+                        else if (val2 > val1) {
+                            swal("Insufficient Balance!");
+                            return false;
+                        }
+
+
+
+                        //    $.ajax({
+                        //        url: "/Customer/WithdrawlCustDetails",
+                        //        type: 'POST',
+                        //        async: false,
+                        //        dataType: 'json',
+                        //        contentType: 'application/json',
+                        //        data: JSON.stringify({
+
+                        //            amt: $('#amount').val(),
+                        //        }),
+                        //        success: function (data) { },
+                        //        error: function (xhr) { }            )
+                        //};
+                        //});
+
+
+
+
+                    });
+
+
+
+
+            </script>*@
+
+        @*@Html.ActionLink("Back to List", "Index")*@
+    </div>
+</body>
+
+</html>
+
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Cust_Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

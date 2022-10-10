@@ -1,0 +1,264 @@
+﻿ @model BankCusManagement.ViewModal.Users
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+    <meta name="viewport" content="width=device-width" />
+    <title>UserLogin</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <style>
+        body {
+            overflow: hidden;
+            height: 100vh;
+            margin-top: -40px;
+        }
+    </style>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-horizontal">
+            @*<h4>tbl_users</h4>*@
+            <hr />
+
+
+            <!-- Section: Design Block -->
+            <section class="background-radial-gradient overflow-hidden">
+                <style>
+                    .background-radial-gradient {
+                        background-color: hsl(218, 41%, 15%);
+                        background-image: radial-gradient(650px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%), radial-gradient(1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%);
+                        height: 100vh;
+                        margin-bottom: -20px;
+                    }
+
+
+                    #radius-shape-1 {
+                        height: 220px;
+                        width: 220px;
+                        top: -60px;
+                        left: -130px;
+                        background: radial-gradient(#44006b, #ad1fff);
+                        overflow: hidden;
+                    }
+
+                    #radius-shape-2 {
+                        border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+                        bottom: -60px;
+                        right: -110px;
+                        width: 300px;
+                        height: 300px;
+                        background: radial-gradient(#44006b, #ad1fff);
+                        overflow: hidden;
+                    }
+
+                    .bg-glass {
+                        background-color: hsla(0, 0%, 100%, 0.9) !important;
+                        backdrop-filter: saturate(200%) blur(25px);
+                    }
+                </style>
+
+
+
+
+                <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+
+
+
+
+
+                    <div class="row gx-lg-5 align-items-center mb-5">
+                        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                            <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                                AXIS BANK <br />
+                                <span style="color: hsl(218, 81%, 75%)">Best Place To Keep Your Money</span>
+                            </h1>
+                            <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                Temporibus, expedita iusto veniam atque, magni tempora mollitia
+                                dolorum consequatur nulla, neque debitis eos reprehenderit quasi
+                                ab ipsum nisi dolorem modi. Quos?
+                            </p>
+                        </div>
+
+
+
+
+                        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                            <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                            <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                            <div class="card bg-glass">
+                                <div class="card-body px-4 py-5 px-md-5">
+
+
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text text-danger", @style = "font-weight:bold; text-align:left;" })
+
+
+                                    <form>
+                                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                                        @*<div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form3Example1" class="form-control" />
+                                                        <label class="form-label" for="form3Example1">First name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form3Example2" class="form-control" />
+                                                        <label class="form-label" for="form3Example2">Last name</label>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+
+                                        <!-- Email input -->
+                                        <div class="form-outline mb-4">
+                                            @*<input type="email" id="form3Example3" class="form-control" />*@
+                                            <label class="form-label" for="form3Example3">Login Id</label>
+                                            @Html.EditorFor(model => model.Login_Id, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Login_Id, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <!-- Password input -->
+                                        <div class="form-outline mb-4">
+                                            @*<input type="password" id="form3Example4" class="form-control" />*@
+                                            <label class="form-label" for="form3Example4">Password</label>
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                        <!-- Checkbox -->
+                                        @*<div class="form-check d-flex justify-content-center mb-4">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                                                <label class="form-check-label" for="form2Example33">
+                                                    Subscribe to our newsletter
+                                                </label>
+                                            </div>*@
+
+                                        <!-- Submit button -->
+                                        <button type="submit" class="btn btn-primary btn-block mb-4">
+                                            Sign In
+                                        </button>
+
+                                        <!-- Register buttons -->
+                                        @*<div class="text-center">
+                                                <p>or sign up with:</p>
+                                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                                    <i class="fab fa-google"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                                    <i class="fab fa-twitter"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                                    <i class="fab fa-github"></i>
+                                                </button>
+                                            </div>*@
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section: Design Block -->
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Uid, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Uid, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Uid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Login_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Login_Id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Login_Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Role_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Role_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Role_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Last_Login, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Last_Login, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Last_Login, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>*@
+        </div>
+    }
+
+    @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
+</body>
+</html>

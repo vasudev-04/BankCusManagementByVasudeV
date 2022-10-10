@@ -1,0 +1,114 @@
+﻿@model BankCusManagement.ViewModal.CustAndHisTransactions
+
+@{
+    ViewBag.Title = "MyTransByDate";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<h2 class="text-primary bolder">CUSTOMER TRANSACTION DETAILS BY DATE</h2>
+
+<html>
+
+<head>
+    @*<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+
+
+    @if (TempData["Error"] != null)
+    {
+        <script>
+                swal("Error!", "@TempData["Error"]");
+        </script>
+
+        @*<div class="alert alert-success">
+                <strong>Success !</strong> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                    <span>&times;</span>
+                </button>
+            </div>*@
+    }
+
+    @*@if (ViewBag.message != null)
+        {
+            <h2 style="color:red;">@ViewBag.message</h2>
+        }*@
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @*<h4>CustAndHisTransactions</h4>*@
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Transaction_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Transaction_Date, new { htmlAttributes = new { @class = "col-md-2", @type = "date", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.Transaction_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" id="btnSubmit" value="Search" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @*@Html.ActionLink("Back to List", "Index")*@
+    </div>
+
+    @*<script>
+            $(document).ready(function () {
+                debugger;
+                $("#btnSubmit").click(function (e) {
+
+                    var val1 = $("#Transaction_Date").text();
+                    //var val2 = $("#amount").val();
+
+
+                    //if (val1 == null || val1 == '' || val1.toLowerCase() == "undefined") {
+                    //    swal("No Matching details were found!");
+                    //}
+
+                    if (val2 <= 0 || val2.match(/^[a-z]+$/)) {
+                        swal("Invalid Input!");
+                        //e.preventDefault();
+                        return false;
+                    }
+
+                    else if (val2 > val1) {
+                        swal("Insufficient Balance!");
+                        return false;
+                    }
+
+
+
+
+
+
+
+                });
+        </script>*@
+
+
+    </div>
+</body>
+
+</html>
+

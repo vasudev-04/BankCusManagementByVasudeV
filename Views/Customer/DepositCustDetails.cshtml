@@ -1,0 +1,223 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    ViewBag.Title = "DepositCustDetails";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<style>
+    table.even {
+        border-collapse: collapse;
+    }
+
+        table.even tr td, th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        table.even tr:nth-child(2n) {
+            background: #f1f1f1;
+        }
+</style>
+<h2 class="text-primary;">Customer Details</h2>
+
+<head>
+    @*<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+
+    @if (TempData["Error"] != null)
+    {
+        <script>
+                swal("Error!", "@TempData["Error"]");
+        </script>
+    }
+    @if (TempData["message"] != null)
+    {
+        <script>
+                swal("Success", "@TempData["message"]");
+        </script>
+    }
+    <div>
+        @*<h4>tbl_customers</h4>*@
+        <hr />
+        <dl class="dl-horizontal">
+            <table class="table even">
+
+
+                <tr class="bolder" style="color: blueviolet; background-color: antiquewhite; font-size: 15px">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_FirstName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_LastName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_City)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Account_Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Account_BalanceAmount)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Last_TransactionDate)
+                        </th>*@
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_Code)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.tbl_users.Login_Id)
+                        </th>*@
+
+
+                </tr>
+
+
+
+
+                <tr class="bolder" style="font-size:15px">
+                    <td>
+                        @Html.DisplayFor(model => model.Customer_FirstName)
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(model => model.Customer_LastName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Customer_City)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Account_Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Account_BalanceAmount)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(model => model.Last_TransactionDate)
+                        </td>*@
+                    <td>
+                        <span id="CustCode">
+                            @Html.DisplayFor(model => model.Customer_Code)
+                        </span>
+
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(model => model.tbl_users.Login_Id)
+                        </td>*@
+                </tr>
+
+
+            </table>
+
+        </dl>
+    </div>
+
+
+
+
+    <div>
+
+        @using (Html.BeginForm("DepositIntoCustAcc","Customer"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal ">
+                @*<h4 class="text-primary bolder">CREATE CUSTOMER</h4>*@
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Account_BalanceAmount, "Enter Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.Account_BalanceAmount, new { htmlAttributes = new { @class = "col-md-4" } })*@
+
+                        <input id="acc" name="Deposit" type="number" min="100" required  />
+                        @*@Html.ValidationMessageFor(model => model.Account_BalanceAmount, "", new { @class = "text-danger" })*@
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Deposit" id="btnStart" class="btn btn-primary" />
+            </div>
+
+        }
+
+        @*  @if (TempData["message"] != null)
+            {
+
+                <script>
+                    alert("dlfhdjklds");
+                        swal("Success!", "@TempData["message"]");
+                </script>
+
+                <div class="alert alert-success">
+                        <strong>Success !</strong> @TempData["message"]
+                        <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+            }*@
+
+    </div>
+
+
+
+    @*<script>
+            @{var res = TempData["message"]; }
+            $(document).ready(function () {
+
+                            var Amount = 0;
+                $('#btnStart').unbind('click');
+                var p = "@TempData["message"]";
+                console.log(p);
+                if (p != "") {
+                     swal("Success!", "@TempData["message"]");
+                }
+                $('#btnStart').on('click', function () {
+                                Amount = $("#acc").val();
+                                if (Amount > 1) {
+                        $.ajax({
+                                        url: "/Customer/DepositIntoCustAcc",
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                            Deposit: Amount,
+                                CustCode: $("#CustCode").text()
+                            })
+                        });
+                                }
+                                else {
+                        event.preventDefault()
+                        swal("Error!", "Amount should be min ₹1 and max ₹50000");
+                    }
+                    //
+                });
+
+            });
+        </script>*@
+
+
+
+    </body>
+    @*@using (Html.BeginForm("DepositIntoCustAcc", "Staff", new { CustCode = Model.Customer_Code, Deposit =  }))
+        {*@
+

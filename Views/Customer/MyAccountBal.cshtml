@@ -1,0 +1,111 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    ViewBag.Title = "MyAccountBal";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<h2 class="text-primary bolder">ACCOUNT BALANCE AS OF NOW</h2>
+<style>
+    table.even {
+        border-collapse: collapse;
+    }
+
+        table.even tr td, th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        table.even tr:nth-child(2n) {
+            background: #f1f1f1;
+        }
+</style>
+
+<div style="text-align:center!important">
+    <h4  ></h4>
+    <hr />
+    <table style="text-align:center!important">
+        @*<tr>
+            @Html.DisplayNameFor(model => model.Customer_FirstName)
+        </tr>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_FirstName)
+        </dd>
+
+        <tr>
+            @Html.DisplayNameFor(model => model.Customer_LastName)
+        </tr>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_LastName)
+        </dd>
+
+        <tr>
+            @Html.DisplayNameFor(model => model.Customer_City)
+        </tr>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_City)
+        </dd>
+
+        <tr>
+            @Html.DisplayNameFor(model => model.Account_Type)
+        </tr>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account_Type)
+        </dd>*@
+
+        <tr style="color:blueviolet;background-color:antiquewhite">
+            <th>
+                @Html.DisplayNameFor(model => model.Account_BalanceAmount)
+            </th>
+           
+                <span></span>
+            
+           
+                <span></span>
+            
+            <th>
+                @Html.DisplayFor(model => model.Account_BalanceAmount)
+            </th>
+        </tr>
+
+        
+           
+
+       
+
+        
+
+        @*<tr>
+            @Html.DisplayNameFor(model => model.Last_TransactionDate)
+        </tr>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_TransactionDate)
+        </dd>
+
+        <tr>
+            @Html.DisplayNameFor(model => model.Customer_Code)
+        </tr>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_Code)
+        </dd>
+
+        <tr>
+            @Html.DisplayNameFor(model => model.tbl_users.Login_Id)
+        </tr>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_users.Login_Id)
+        </dd>*@
+
+    </table>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Cust_Id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

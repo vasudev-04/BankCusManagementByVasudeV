@@ -1,0 +1,123 @@
+﻿@model BankCusManagement.ViewModal.Customers
+
+@{
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyProfile</title>
+    <style>
+        table.even {
+            border-collapse: collapse;
+        }
+
+            table.even tr td, th {
+                border: 1px solid #ccc;
+                padding: 5px;
+            }
+
+            table.even tr:nth-child(2n) {
+                background: #f1f1f1;
+            }
+    </style>
+</head>
+<body>
+    @if(TempData["Error"] != null){
+
+        <div class="alert alert-danger">
+            <strong>Alert !</strong> @TempData["Error"]
+            <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                <span>&times;</span>
+            </button>
+        </div>
+
+    }
+
+
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <table class="table even">
+        <tr style="color:blueviolet;background-color:antiquewhite">
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Cust_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Uid)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_City)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Account_Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account_BalanceAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Last_TransactionDate)
+                </th>*@
+
+            <th></th>
+        </tr>
+
+        @*@foreach (var item in Model) {*@
+        <tr class="bolder" style="font-size:15px">
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Cust_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Uid)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Customer_Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Customer_FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Customer_LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Customer_FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Customer_City)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Account_Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account_BalanceAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Last_TransactionDate)
+                </td>*@
+
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+        </tr>
+        @*}*@
+
+    </table>
+</body>
+</html>

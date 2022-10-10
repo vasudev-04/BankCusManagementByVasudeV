@@ -1,0 +1,61 @@
+﻿@model BankCusManagement.ViewModal.TransDetByDate
+
+@{
+    ViewBag.Title = "TransReportByDate";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<html>
+<head>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+<body>
+    @if (TempData["Error"] != null)
+    {
+        <script>
+                swal("Error!", "@TempData["Error"]");
+        </script>
+
+        @*<div class="alert alert-success">
+                <strong>Success !</strong> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                    <span>&times;</span>
+                </button>
+            </div>*@
+    }
+
+    <h2 class="text-primary text-capitalize" style="font-weight:bold;">TRANSACTION REPORT BY DATE</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger", @style = "font-weight:bold" })
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "col-md-4", @type = "date", placeholder = "short name", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @*@Html.ActionLink("Back to List", "Index")*@
+    </div>
+
+</body>
+</html>
+

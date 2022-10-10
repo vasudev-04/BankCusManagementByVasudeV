@@ -1,0 +1,130 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>DeleteCustomer</title>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/b3b792a127.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    @*<h3>Are you sure you want to delete this?</h3>*@
+    <div>
+        @if (TempData["Error"] != null)
+        {
+            <script>
+                swal("Error!", "@TempData["Error"]");
+            </script>
+
+           
+        }
+        <hr />
+
+
+        @using (Html.BeginForm())
+        {
+
+
+            <div class="form-horizontal">
+                <h2 class="text-primary bolder">Delete Customer</h2>
+                <hr />
+                @Html.AntiForgeryToken()
+
+
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text text-danger", @style = "font-weight:bold; text-align:left;" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_Code, "Customer Code", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_Code, new { htmlAttributes = new { @class = "col-md-4", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Uid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" id="submitbtn" value="Delete" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <script>
+            $(document).ready(function () {
+                $('#submitbtn').click(function () {
+                    $('#Uid').val(null);
+                });
+            }
+
+        </script>
+
+        @*<script>
+            $(document).ready(function () {
+                debugger;
+                $("#submitbtn").click(function () {
+
+
+                    var userName = $("Uid").val();
+
+
+                    // var status = $("input[name = 'status']:checked").val();
+
+
+
+                    if (userName == '') {
+                        swal({
+                            title: "Fill All Mandatory Fields!",
+                            text: "Retry Again!",
+                            icon: "warning",
+                            button: "Ok!",
+                        });
+                    }
+
+                    else {
+                        swal({
+                            title: "Good Job!",
+                            text: "Details Deleted Successfully!",
+                            icon: "success",
+                            button: "Ok!",
+                        });
+                    }
+
+
+                });
+
+
+            });
+
+        </script>*@
+
+
+
+
+
+        @*@using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }*@
+    </div>
+</body>
+</html>

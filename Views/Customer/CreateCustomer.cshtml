@@ -1,0 +1,103 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateCustomer</title>
+
+    <style>
+        .blurr-shadow {
+            text-shadow: 2px 2px 5px #101010;
+            color: #fff;
+        }
+    </style>
+</head>
+<body >
+    <div class="blurr-shadow">
+
+        @using (Html.BeginForm())
+        {
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal " style="box-shadow: 1px 2px 3px 4px rgba(20,20,20,0.4)">
+                <h4>tbl_customers</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Uid, "Uid", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Uid", null, htmlAttributes: new { @class = "col-md-4" })
+                        @Html.ValidationMessageFor(model => model.Uid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_FirstName, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Customer_FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_LastName, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Customer_LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_City, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_City, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Customer_City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Account_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Account_Type, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Account_Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Account_BalanceAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Account_BalanceAmount, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Account_BalanceAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Last_TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Last_TransactionDate, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Last_TransactionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </div>
+</body>
+</html>

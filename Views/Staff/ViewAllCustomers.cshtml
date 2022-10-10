@@ -1,0 +1,132 @@
+﻿@model IEnumerable<BankCusManagement.Models.tbl_customers>
+
+@{
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewAllCustomers</title>
+
+    <style>
+        table.even {
+            border-collapse: collapse;
+        }
+
+            table.even tr td, th {
+                border: 1px solid #ccc;
+                padding: 5px;
+            }
+
+            table.even tr:nth-child(2n) {
+                background: #f1f1f1;
+            }
+    </style>
+</head>
+
+<body>
+    @if (TempData["Error"] != null)
+    {
+        <script>
+            swal("Error!", "No Data found to Show!");
+        </script>
+      
+        @*<div class="alert alert-success">
+            <strong>Success !</strong> @TempData["Error"]
+            <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                <span>&times;</span>
+            </button>
+        </div>*@
+    }
+
+    @if (Model != null)
+    {
+
+        <p>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger", @style = "font-weight:bold" })
+            @*@Html.ActionLink("Create New", "Create")*@
+        </p>
+        <table class="table even">
+            <tr class="bolder" style="color: blueviolet; background-color: antiquewhite; font-size: 15px">
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer_FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer_LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer_City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account_Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account_BalanceAmount)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.tbl_users.Status)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Last_TransactionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer_Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tbl_users.Login_Id)
+                </th>
+                <th> Action</th>
+            </tr>
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <tr class="bolder" style="font-size:15px">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account_Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account_BalanceAmount)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbl_users.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Last_TransactionDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbl_users.Login_Id)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { custCode = item.Customer_Code })
+                            @*@Html.ActionLink("Details", "Details", new { id=item.Cust_Id }) |*@
+                            @*@Html.ActionLink("Delete", "Delete", new { custCode = item.Customer_Code })*@
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    }
+</body>
+</html>

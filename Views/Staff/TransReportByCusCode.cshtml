@@ -1,0 +1,154 @@
+﻿@model IEnumerable<BankCusManagement.ViewModal.CustAndHisTransactions>
+
+@{
+    ViewBag.Title = "TransReportByCusCode";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+@{
+
+    if (TempData["Nodata"] != null)
+    {
+
+        <div class="alert alert-success">
+            <strong>Success !</strong> @TempData["Nodata"]
+            <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                <span>&times;</span>
+            </button>
+        </div>
+    }
+}
+
+<html>
+<head>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+<body>
+    @if (TempData["Error"] != null)
+    {
+        <script>
+                swal("Error!", "@TempData["Error"]");
+        </script>
+
+        @*<div class="alert alert-success">
+                <strong>Success !</strong> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                    <span>&times;</span>
+                </button>
+            </div>*@
+    }
+    <h2 class="text-primary bolder">TRANSACTION REPORT BY CUSTOMER CODE</h2>
+    <div>
+
+        <style>
+            table.even {
+                border-collapse: collapse;
+            }
+
+                table.even tr td, th {
+                    border: 1px solid #ccc;
+                    padding: 5px;
+                }
+
+                table.even tr:nth-child(2n) {
+                    background: #f1f1f1;
+                }
+        </style>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @*<h4>CustAndHisTransactions</h4>*@@*<h4>CustAndHisTransactions</h4>*@
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger", @style = "font-weight:bold;font-width:50px;" })
+                <div class="form-group">
+                    @*@Html.LabelFor(m => Customer_Code, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="left" style="padding-left:80px">
+
+
+
+                        <div style="margin-bottom:10px">
+                            <input id="CustCode" type="text" name="CustCode" placeholder="Enter Customer Code">
+                        </div>
+
+                        <div>
+                            <input type="submit" value="Search" class="btn btn-primary" />
+                        </div>
+                        @*<span>*@
+
+                        @*</span>*@
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    </div>
+    <div>
+
+        @if (Model != null)
+        {
+
+
+            <table class="table even">
+                <tr class="bolder" style="color: blueviolet; background-color: antiquewhite; font-size: 15px">
+                    <th class="pr-10">
+                        @Html.DisplayNameFor(model => model.Customer_Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TypeOf_Transaction)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Transaction_Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Transaction_Date)
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr class="bolder" style="font-size:15px">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeOf_Transaction)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Transaction_Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Transaction_Date)
+                        </td>
+
+                        <td>
+                            @*@Html.ActionLink("Edit", "Edit", new { id=item.Cust_Id }) |
+                                    @Html.ActionLink("Details", "Details", new { id=item.Cust_Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id=item.Cust_Id })
+                                </td>*@
+                    </tr>
+                }
+
+            </table>
+        }
+
+
+    </div>
+</body>
+</html>
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

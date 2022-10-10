@@ -1,0 +1,117 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    ViewBag.Title = "DeleteCustomerView";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+<style>
+    table.even {
+        border-collapse: collapse;
+    }
+
+        table.even tr td, th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        table.even tr:nth-child(2n) {
+            background: #f1f1f1;
+        }
+</style>
+<h2>ARE YOU SURE WANT TO DELETE THIS CUSTOMER</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <table class="table even">
+            <thead>
+
+
+
+                <tr class="bolder" style="color: blueviolet; background-color: antiquewhite; font-size: 15px">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_FirstName)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_LastName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_City)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Account_Type)
+                    </th>
+
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Account_BalanceAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Last_TransactionDate)
+                        </th>*@
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_Code)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbl_users.Login_Id)
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                <tr class="bolder" style="font-size:15px">
+                    <td>
+                        @Html.DisplayFor(model => model.Customer_FirstName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Customer_LastName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Customer_City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Account_Type)
+                    </td>
+
+                    @*<td>
+                            @Html.DisplayFor(model => model.Account_BalanceAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Last_TransactionDate)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(model => model.Customer_Code)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.tbl_users.Login_Id)
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+
+
+    </dl>
+    @using (Html.BeginForm("DelInactiveCust", "Staff", new { cust = Model.Customer_Code})){
+    <div>
+        <input type="submit" value="Delete" id="btnSearch" class="btn btn-outline-light" />
+    </div>
+    }
+
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Cust_Id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

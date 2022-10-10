@@ -1,0 +1,134 @@
+﻿@model IEnumerable<BankCusManagement.ViewModal.CustAndHisTransactions>
+
+@{
+    ViewBag.Title = "TransReportByCusCode";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+
+<html>
+<head>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+<body>
+    @if (TempData["Error"] != null)
+    {
+        
+        <script>
+                swal("Error!", "@TempData["Error"]");
+        </script>
+
+        @*<div class="alert alert-success">
+                <strong>Success !</strong> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                    <span>&times;</span>
+                </button>
+            </div>*@
+    }
+    <h2 class="text-primary bolder">DETAILED TRANSACTION REPORT BY DATE</h2>
+    <div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @*<h4>CustAndHisTransactions</h4>*@@*<h4>CustAndHisTransactions</h4>*@
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger", @style = "font-weight:bold" })
+                <div class="form-group">
+                    @*@Html.LabelFor(m => Customer_Code, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div style="padding-left:80px">
+
+
+
+
+
+
+
+                        <span style="margin-right:15px">
+                            <label>Enter Date</label>
+                        </span>
+
+
+
+                        <span style="margin-right:15px">
+                            <input id="Date" name="Date" type="date" placeholder="Enter Date" required="required" />
+                        </span>
+
+
+                        <input id="btnsubmit" type="submit" value="Submit" class="btn btn-primary" />
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    </div>
+    <div>
+
+        @if (Model != null)
+        {
+
+
+            <table class="center padding-left:15px">
+                <tr>
+                    <th class="pr-10">
+                        @Html.DisplayNameFor(model => model.Customer_Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TypeOf_Transaction)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Transaction_Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Transaction_Date)
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeOf_Transaction)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Transaction_Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Transaction_Date)
+                        </td>
+
+                        <td>
+                            @*@Html.ActionLink("Edit", "Edit", new { id=item.Cust_Id }) |
+                                    @Html.ActionLink("Details", "Details", new { id=item.Cust_Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id=item.Cust_Id })
+                                </td>*@
+                    </tr>
+                }
+
+            </table>
+        }
+
+
+    </div>
+</body>
+</html>
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

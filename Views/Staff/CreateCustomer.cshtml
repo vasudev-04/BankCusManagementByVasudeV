@@ -1,0 +1,179 @@
+﻿@model BankCusManagement.ViewModal.UserCustomer
+
+@{
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>New Customer</title>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/b3b792a127.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="shadow-lg">
+
+        @*@if (TempData["Success"] != null)
+        {
+
+            <div class="alert alert-success">
+                <strong>Success !</strong> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                    <span>&times;</span>
+                </button>
+            </div>
+        }*@
+        @if (TempData["Success"] != null)
+        {
+
+        <script>
+                swal({
+                        title: "Good Job!",
+                        text: "Details Saved Successfully!",
+                        icon: "success",
+                        button: "Ok!",
+                    });
+        </script>
+
+            @*<div class="alert alert-success">
+                <strong>Success !</strong> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                    <span>&times;</span>
+                </button>
+            </div>*@
+        }
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal ">
+                <h4 class="text-primary bolder">CREATE CUSTOMER</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_FirstName, "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_FirstName, new { htmlAttributes = new { @class = "col-md-4", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Customer_FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_LastName, "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_LastName, new { htmlAttributes = new { @class = "col-md-4", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Customer_LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_City, "City", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_City, new { htmlAttributes = new { @class = "col-md-4", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Customer_City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Account_Type, "Account Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Account_Type, new { htmlAttributes = new { @class = "col-md-4", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Account_Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.Account_BalanceAmount, "Account Balance", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Account_BalanceAmount, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Account_BalanceAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Login_Id, "Login Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Login_Id, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Login_Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User_Name, "User Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" id="submitbtn" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#submitbtn").click(function () {
+
+
+                var userName = $("#Customer_FirstName").val();
+                var password = $("#Customer_LastName").val();
+                var contactNumber = $("#Login_Id").val();
+                var emailid = $("#Password").val();
+                var status = $("#User_Name").val();
+
+                // var status = $("input[name = 'status']:checked").val();
+
+
+
+                if (userName == '' || password == '' || contactNumber == '' || emailid == '' || status == '') {
+                    swal({
+                        title: "Fill All Mandatory Fields!",
+                        text: "Retry Again!",
+                        icon: "warning",
+                        button: "Ok!",
+                    });
+                }
+
+                else {
+                    
+                }
+
+                
+            });
+
+
+        });
+
+    </script>
+
+
+
+
+    <div>
+        @*@Html.ActionLink("Index", "Staff")*@
+    </div>
+</body>
+</html>

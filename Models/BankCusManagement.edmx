@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BankCusManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_customer_transactions">
+          <Key>
+            <PropertyRef Name="Transaction_Id" />
+          </Key>
+          <Property Name="Transaction_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cust_Id" Type="int" Nullable="false" />
+          <Property Name="TypeOf_Transaction" Type="char" MaxLength="10" />
+          <Property Name="Transaction_Amount" Type="float" />
+          <Property Name="Transaction_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_customers">
+          <Key>
+            <PropertyRef Name="Cust_Id" />
+          </Key>
+          <Property Name="Cust_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Uid" Type="int" Nullable="false" />
+          <Property Name="Customer_FirstName" Type="varchar" MaxLength="200" />
+          <Property Name="Customer_LastName" Type="varchar" MaxLength="200" />
+          <Property Name="Customer_City" Type="varchar" MaxLength="200" />
+          <Property Name="Account_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Account_BalanceAmount" Type="float" />
+          <Property Name="Last_TransactionDate" Type="datetime" />
+          <Property Name="Customer_Code" Type="varchar" MaxLength="33" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tbl_role_menu">
+          <Key>
+            <PropertyRef Name="Menu_Id" />
+          </Key>
+          <Property Name="Menu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Menu_Name" Type="varchar" MaxLength="200" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Roles">
+          <Key>
+            <PropertyRef Name="RoleI_d" />
+          </Key>
+          <Property Name="RoleI_d" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_users">
+          <Key>
+            <PropertyRef Name="Uid" />
+          </Key>
+          <Property Name="Uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login_Id" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Role_ID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="Last_Login" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_tbl_customer_transactions_tbl_customer_transactions">
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="1" />
+          <End Role="tbl_customer_transactions" Type="Self.tbl_customer_transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_customers">
+              <PropertyRef Name="Cust_Id" />
+            </Principal>
+            <Dependent Role="tbl_customer_transactions">
+              <PropertyRef Name="Cust_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_customers_tbl_users">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="1" />
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="Uid" />
+            </Principal>
+            <Dependent Role="tbl_customers">
+              <PropertyRef Name="Uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_role_menu_tbl_Roles">
+          <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="1" />
+          <End Role="tbl_role_menu" Type="Self.tbl_role_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Roles">
+              <PropertyRef Name="RoleI_d" />
+            </Principal>
+            <Dependent Role="tbl_role_menu">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_users_tbl_Roles">
+          <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="1" />
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Roles">
+              <PropertyRef Name="RoleI_d" />
+            </Principal>
+            <Dependent Role="tbl_users">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetTransactionsByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="BankCusManagementModelStoreContainer">
+          <EntitySet Name="tbl_customer_transactions" EntityType="Self.tbl_customer_transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_customers" EntityType="Self.tbl_customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_role_menu" EntityType="Self.tbl_role_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_customer_transactions_tbl_customer_transactions" Association="Self.FK_tbl_customer_transactions_tbl_customer_transactions">
+            <End Role="tbl_customers" EntitySet="tbl_customers" />
+            <End Role="tbl_customer_transactions" EntitySet="tbl_customer_transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_customers_tbl_users" Association="Self.FK_tbl_customers_tbl_users">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_customers" EntitySet="tbl_customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_role_menu_tbl_Roles" Association="Self.FK_tbl_role_menu_tbl_Roles">
+            <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+            <End Role="tbl_role_menu" EntitySet="tbl_role_menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_users_tbl_Roles" Association="Self.FK_tbl_users_tbl_Roles">
+            <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+            <End Role="tbl_users" EntitySet="tbl_users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BankCusManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_customer_transactions">
+          <Key>
+            <PropertyRef Name="Transaction_Id" />
+          </Key>
+          <Property Name="Transaction_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cust_Id" Type="Int32" Nullable="false" />
+          <Property Name="TypeOf_Transaction" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Transaction_Amount" Type="Double" />
+          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_customers" Relationship="Self.FK_tbl_customer_transactions_tbl_customer_transactions" FromRole="tbl_customer_transactions" ToRole="tbl_customers" />
+        </EntityType>
+        <EntityType Name="tbl_customers">
+          <Key>
+            <PropertyRef Name="Cust_Id" />
+          </Key>
+          <Property Name="Cust_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Uid" Type="Int32" Nullable="false" />
+          <Property Name="Customer_FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_City" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Account_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Account_BalanceAmount" Type="Double" />
+          <Property Name="Last_TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="Customer_Code" Type="String" MaxLength="33" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tbl_customer_transactions" Relationship="Self.FK_tbl_customer_transactions_tbl_customer_transactions" FromRole="tbl_customers" ToRole="tbl_customer_transactions" />
+          <NavigationProperty Name="tbl_users" Relationship="Self.FK_tbl_customers_tbl_users" FromRole="tbl_customers" ToRole="tbl_users" />
+        </EntityType>
+        <EntityType Name="tbl_role_menu">
+          <Key>
+            <PropertyRef Name="Menu_Id" />
+          </Key>
+          <Property Name="Menu_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Menu_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Roles" Relationship="Self.FK_tbl_role_menu_tbl_Roles" FromRole="tbl_role_menu" ToRole="tbl_Roles" />
+        </EntityType>
+        <EntityType Name="tbl_Roles">
+          <Key>
+            <PropertyRef Name="RoleI_d" />
+          </Key>
+          <Property Name="RoleI_d" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_role_menu" Relationship="Self.FK_tbl_role_menu_tbl_Roles" FromRole="tbl_Roles" ToRole="tbl_role_menu" />
+          <NavigationProperty Name="tbl_users" Relationship="Self.FK_tbl_users_tbl_Roles" FromRole="tbl_Roles" ToRole="tbl_users" />
+        </EntityType>
+        <EntityType Name="tbl_users">
+          <Key>
+            <PropertyRef Name="Uid" />
+          </Key>
+          <Property Name="Uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login_Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role_ID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Login" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_customers" Relationship="Self.FK_tbl_customers_tbl_users" FromRole="tbl_users" ToRole="tbl_customers" />
+          <NavigationProperty Name="tbl_Roles" Relationship="Self.FK_tbl_users_tbl_Roles" FromRole="tbl_users" ToRole="tbl_Roles" />
+        </EntityType>
+        <Association Name="FK_tbl_customer_transactions_tbl_customer_transactions">
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="1" />
+          <End Role="tbl_customer_transactions" Type="Self.tbl_customer_transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_customers">
+              <PropertyRef Name="Cust_Id" />
+            </Principal>
+            <Dependent Role="tbl_customer_transactions">
+              <PropertyRef Name="Cust_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_customers_tbl_users">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="1" />
+          <End Role="tbl_customers" Type="Self.tbl_customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="Uid" />
+            </Principal>
+            <Dependent Role="tbl_customers">
+              <PropertyRef Name="Uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_role_menu_tbl_Roles">
+          <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="1" />
+          <End Role="tbl_role_menu" Type="Self.tbl_role_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Roles">
+              <PropertyRef Name="RoleI_d" />
+            </Principal>
+            <Dependent Role="tbl_role_menu">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_users_tbl_Roles">
+          <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="1" />
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Roles">
+              <PropertyRef Name="RoleI_d" />
+            </Principal>
+            <Dependent Role="tbl_users">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankCusManagementEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_customer_transactions" EntityType="Self.tbl_customer_transactions" />
+          <EntitySet Name="tbl_customers" EntityType="Self.tbl_customers" />
+          <EntitySet Name="tbl_role_menu" EntityType="Self.tbl_role_menu" />
+          <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" />
+          <EntitySet Name="tbl_users" EntityType="Self.tbl_users" />
+          <AssociationSet Name="FK_tbl_customer_transactions_tbl_customer_transactions" Association="Self.FK_tbl_customer_transactions_tbl_customer_transactions">
+            <End Role="tbl_customers" EntitySet="tbl_customers" />
+            <End Role="tbl_customer_transactions" EntitySet="tbl_customer_transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_customers_tbl_users" Association="Self.FK_tbl_customers_tbl_users">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_customers" EntitySet="tbl_customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_role_menu_tbl_Roles" Association="Self.FK_tbl_role_menu_tbl_Roles">
+            <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+            <End Role="tbl_role_menu" EntitySet="tbl_role_menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_users_tbl_Roles" Association="Self.FK_tbl_users_tbl_Roles">
+            <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+            <End Role="tbl_users" EntitySet="tbl_users" />
+          </AssociationSet>
+          <FunctionImport Name="GetTransactionsByDate" ReturnType="Collection(BankCusManagementModel.GetTransactionsByDate_Result1)">
+          <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetTransactionsByDate_Result">
+          <Property Type="DateTime" Name="Transaction_Date" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="Amount" Nullable="true" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="String" Name="TypeOf_Transaction" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetTransactionsByDate_Result1">
+          <Property Type="DateTime" Name="Transaction_Date" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="Amount" Nullable="true" />
+          <Property Type="Int32" Name="Noofcustomers" Nullable="true" />
+          <Property Type="String" Name="TypeOf_Transaction" Nullable="true" MaxLength="10" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BankCusManagementModelStoreContainer" CdmEntityContainer="BankCusManagementEntity">
+          <EntitySetMapping Name="tbl_customer_transactions">
+            <EntityTypeMapping TypeName="BankCusManagementModel.tbl_customer_transactions">
+              <MappingFragment StoreEntitySet="tbl_customer_transactions">
+                <ScalarProperty Name="Transaction_Id" ColumnName="Transaction_Id" />
+                <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+                <ScalarProperty Name="TypeOf_Transaction" ColumnName="TypeOf_Transaction" />
+                <ScalarProperty Name="Transaction_Amount" ColumnName="Transaction_Amount" />
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_customers">
+            <EntityTypeMapping TypeName="BankCusManagementModel.tbl_customers">
+              <MappingFragment StoreEntitySet="tbl_customers">
+                <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="Customer_FirstName" ColumnName="Customer_FirstName" />
+                <ScalarProperty Name="Customer_LastName" ColumnName="Customer_LastName" />
+                <ScalarProperty Name="Customer_City" ColumnName="Customer_City" />
+                <ScalarProperty Name="Account_Type" ColumnName="Account_Type" />
+                <ScalarProperty Name="Account_BalanceAmount" ColumnName="Account_BalanceAmount" />
+                <ScalarProperty Name="Last_TransactionDate" ColumnName="Last_TransactionDate" />
+                <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_role_menu">
+            <EntityTypeMapping TypeName="BankCusManagementModel.tbl_role_menu">
+              <MappingFragment StoreEntitySet="tbl_role_menu">
+                <ScalarProperty Name="Menu_Id" ColumnName="Menu_Id" />
+                <ScalarProperty Name="Menu_Name" ColumnName="Menu_Name" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Roles">
+            <EntityTypeMapping TypeName="BankCusManagementModel.tbl_Roles">
+              <MappingFragment StoreEntitySet="tbl_Roles">
+                <ScalarProperty Name="RoleI_d" ColumnName="RoleI_d" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_users">
+            <EntityTypeMapping TypeName="BankCusManagementModel.tbl_users">
+              <MappingFragment StoreEntitySet="tbl_users">
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Last_Login" ColumnName="Last_Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetTransactionsByDate" FunctionName="BankCusManagementModel.Store.GetTransactionsByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankCusManagementModel.GetTransactionsByDate_Result1">
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Noofcustomers" ColumnName="Noofcustomers" />
+                <ScalarProperty Name="TypeOf_Transaction" ColumnName="TypeOf_Transaction" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

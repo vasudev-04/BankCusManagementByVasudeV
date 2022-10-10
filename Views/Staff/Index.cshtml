@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BankCusManagement.Models.tbl_role_menu>
+
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        body {
+            background-image: url("https://image.shutterstock.com/image-photo/businessman-holding-word-banking-hand-600w-1150180799.jpg");
+            height: 100vh;
+            background-size: cover;
+        }
+
+        h3 {
+            color: white;
+            text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+            text-align: center;
+        }
+    </style>
+</head>
+@if(@Session["UserKey"] != null){
+
+<body>
+    <h3>HELLO<span style=""> @Session["UserName"].ToString().ToUpper() </span>WELCOME TO <span style="color:deeppink!important">AXIS BANK</span></h3>
+</body>
+}
+</html>

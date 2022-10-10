@@ -1,0 +1,129 @@
+﻿@model BankCusManagement.Models.tbl_customers
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<h2 class="text-primary" style="font-weight:bold">Edit Customer Details</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["Success"]
+        <button type="button" class="close" data-dismiss="alert" arial-label="close">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+<html>
+<head>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+<body>
+    @if (TempData["Error"] != null)
+    {
+
+        <script>
+                swal("Error!", "@TempData["Error"]");
+        </script>
+
+        @*<div class="alert alert-success">
+                <strong>Success !</strong> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" arial-label="close">
+                    <span>&times;</span>
+                </button>
+            </div>*@
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @*<h4>tbl_customers</h4>*@
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Cust_Id)
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Uid, "Uid", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Uid", null, htmlAttributes: new { @class = "col-md-4" })
+                        @Html.ValidationMessageFor(model => model.Uid, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer_FirstName, "First Name",htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer_FirstName, new { htmlAttributes = new { @class = "col-md-4" } })
+                    @Html.ValidationMessageFor(model => model.Customer_FirstName, "First Name is Required", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer_LastName, "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer_LastName, new { htmlAttributes = new { @class = "col-md-4" } })
+                    @Html.ValidationMessageFor(model => model.Customer_LastName, "Last Name is Required", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer_City, "City",htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer_City, new { htmlAttributes = new { @class = "col-md-4" } })
+                    @Html.ValidationMessageFor(model => model.Customer_City, "City is Required", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Account_Type,"Account Type" ,htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Account_Type, new { htmlAttributes = new { @class = "col-md-4" } })
+                    @Html.ValidationMessageFor(model => model.Account_Type, "Account Type is Required", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Account_BalanceAmount, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.RadioButtonFor(model => model.tbl_users.Status, "Active", new { htmlAttributes = new { @class = "" } }) Active
+                    @Html.RadioButtonFor(model => model.tbl_users.Status, "Inactive", new { htmlAttributes = new { @class = "" } }) InActive
+
+                    @Html.ValidationMessageFor(model => model.tbl_users.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Last_TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Last_TransactionDate, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Last_TransactionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer_Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Customer_Code, new { htmlAttributes = new { @class = "col-md-4" } })
+                        @Html.ValidationMessageFor(model => model.Customer_Code, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankCusManagementModelStoreContainer" CdmEntityContainer="BankCusManagementEntity">
+    <EntitySetMapping Name="tbl_customer_transactions">
+      <EntityTypeMapping TypeName="BankCusManagementModel.tbl_customer_transactions">
+        <MappingFragment StoreEntitySet="tbl_customer_transactions">
+          <ScalarProperty Name="Transaction_Id" ColumnName="Transaction_Id" />
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="TypeOf_Transaction" ColumnName="TypeOf_Transaction" />
+          <ScalarProperty Name="Transaction_Amount" ColumnName="Transaction_Amount" />
+          <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_customers">
+      <EntityTypeMapping TypeName="BankCusManagementModel.tbl_customers">
+        <MappingFragment StoreEntitySet="tbl_customers">
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Customer_FirstName" ColumnName="Customer_FirstName" />
+          <ScalarProperty Name="Customer_LastName" ColumnName="Customer_LastName" />
+          <ScalarProperty Name="Customer_City" ColumnName="Customer_City" />
+          <ScalarProperty Name="Account_Type" ColumnName="Account_Type" />
+          <ScalarProperty Name="Account_BalanceAmount" ColumnName="Account_BalanceAmount" />
+          <ScalarProperty Name="Last_TransactionDate" ColumnName="Last_TransactionDate" />
+          <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_role_menu">
+      <EntityTypeMapping TypeName="BankCusManagementModel.tbl_role_menu">
+        <MappingFragment StoreEntitySet="tbl_role_menu">
+          <ScalarProperty Name="Menu_Id" ColumnName="Menu_Id" />
+          <ScalarProperty Name="Menu_Name" ColumnName="Menu_Name" />
+          <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Roles">
+      <EntityTypeMapping TypeName="BankCusManagementModel.tbl_Roles">
+        <MappingFragment StoreEntitySet="tbl_Roles">
+          <ScalarProperty Name="RoleI_d" ColumnName="RoleI_d" />
+          <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_users">
+      <EntityTypeMapping TypeName="BankCusManagementModel.tbl_users">
+        <MappingFragment StoreEntitySet="tbl_users">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Last_Login" ColumnName="Last_Login" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetTransactionsByDate" FunctionName="BankCusManagementModel.Store.GetTransactionsByDate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankCusManagementModel.GetTransactionsByDate_Result1">
+          <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Noofcustomers" ColumnName="Noofcustomers" />
+          <ScalarProperty Name="TypeOf_Transaction" ColumnName="TypeOf_Transaction" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

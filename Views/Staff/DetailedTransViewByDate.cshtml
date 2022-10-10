@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BankCusManagement.ViewModal.CustAndHisTransactions>
+
+@{
+    ViewBag.Title = "DetailedTransViewByDate";
+    Layout = "~/Views/ShatedFolder/View.cshtml";
+}
+
+<h2 class="bolder text-primary">DETAILED TRANSACTION REPORT BY DATE</h2>
+
+<style>
+    table.even {
+        border-collapse: collapse;
+    }
+
+        table.even tr td, th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        table.even tr:nth-child(2n) {
+            background: #f1f1f1;
+        }
+</style>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table even">
+    <tr class="bolder" style="color: blueviolet; background-color: antiquewhite; font-size: 15px">
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOf_Transaction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transaction_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transaction_Date)
+        </th>
+        <th></th>
+    </tr>
+    @{ 
+        double? TotalAmount = 0.0;
+        DateTime? date1 = null;
+    }
+
+@foreach (var item in Model) {
+
+    TotalAmount += item.Transaction_Amount;
+    date1 = item.Transaction_Date;
+
+    <tr class="bolder" style="font-size:15px">
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOf_Transaction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transaction_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transaction_Date).ToString().Remove(11, 8)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+}
+
+</table>
+
+<div>
+    <h4 style="text-align:center; color:darkslateblue;font-weight:bold;font-family:'Times New Roman'">TOTAL TRANSACTED AMOUNT AS ON @date1.ToString().Remove(11, 8) : @TotalAmount.ToString()</h4>
+
+</div>
